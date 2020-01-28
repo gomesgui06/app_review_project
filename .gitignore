@@ -1,0 +1,5 @@
+airflow/logs/
+airflow/airflow.cfg
+airflow/airflow.db
+venv
+*log
