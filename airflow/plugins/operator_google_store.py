@@ -6,7 +6,8 @@ from airflow.models import BaseOperator
 from airflow.utils.decorators import apply_defaults
 from airflow.plugins_manager import AirflowPlugin
 
-#from airflow.crawler_google_store import CrawlerApp
+
+from crawler.crawler_google_store import CrawlerApp
 
 
 logging.basicConfig (stream = sys.stdout,
@@ -26,15 +27,11 @@ class GoogleStoreToDataLakeOperator(BaseOperator):
 
     def execute(self, context):
         logging.info('Crawler start')
-
-'''
-
         CrawlerApp(app_id=self.app_id,
                    language=self.language,
                    output=self.output).run_reviews()
-'''
 
 
 class GoogleStoreToDataLakePlugin(AirflowPlugin):
     name = 'GoogleStorePlugin'
-    operator = [GoogleStoreToDataLakeOperator]
+    operators = [GoogleStoreToDataLakeOperator]

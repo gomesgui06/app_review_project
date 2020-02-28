@@ -31,7 +31,8 @@ def review_already_exists(review,all_reviews):
             return True
         return False
 
-#pega informações da avaliação
+
+# pega informações da avaliação
 def get_information_review(review_element_child):
     review_text = review_element_child.find_element_by_xpath('./div[2]/div[2]/span[1]').text.strip()
     iduser = review_element_child.find_element_by_xpath('./div[1]/img').get_attribute("src").strip()
@@ -45,6 +46,7 @@ def get_information_review(review_element_child):
     answer = review_element_child.find_element_by_xpath('./div[2]/div[3]').text.strip()
     return dict(iduser=iduser,name=name,date=date,rating=rating,review_text=review_text,like=like,
                 name_answer=name_answer,date_answer=date_answer,answer=answer)
+
 
 @six.add_metaclass(abc.ABCMeta)
 class CrawlerApp():
@@ -78,7 +80,7 @@ class CrawlerApp():
             sleep(_SCROLL_PAUSE_TIME)
             self._scroll_page()
             self.collect_reviews().to_csv()
-            #self.collect_reviews().to_csv(f"{self.output}/crawlerapp_{items_option1}_{items_option2}.csv")
+            # self.collect_reviews().to_csv(f"{self.output}/crawlerapp_{items_option1}_{items_option2}.csv")
 
     def getlink(self):
         link=f"{link_app}{self.app_id}&hl={self.language}&showAllReviews=true"
@@ -129,8 +131,6 @@ class CrawlerApp():
     def _get_list_options(self):
         items1=self._get_item_listbox(0)
         items2=self._get_item_listbox(1)
-        return [[items1.index(x),items2.index(y)] for x in items1 for y in items2]
+        return [[items1.index(x), items2.index(y)] for x in items1 for y in items2]
 
 
-# fazer esse arquivo salvar essa informação em algum banco
-# quebrar essa código para virar vários operadores

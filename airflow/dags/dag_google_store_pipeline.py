@@ -3,7 +3,7 @@ from airflow.operators.dummy_operator import DummyOperator
 from datetime import datetime, timedelta
 
 
-import airflow.operators.GoogleStorePlugin.GoogleStoreToDataLakeOperator
+from airflow.operators import GoogleStoreToDataLakeOperator
 
 
 default_args = {
@@ -32,8 +32,7 @@ end_dag = DummyOperator(
     dag = dag)
 
 
-'''
-google_store_dag = GoogleStoreToDataLake(
+google_store_dag = GoogleStoreToDataLakeOperator(
     task_id = 'google_store_dag',
     default_args = default_args,
     dag = dag,
@@ -44,5 +43,5 @@ google_store_dag = GoogleStoreToDataLake(
     language = 'en',
     output = '')
 
-'''
-start_dag  >> end_dag
+
+start_dag >> google_store_dag >> end_dag
