@@ -12,7 +12,7 @@ services:
                 max-file: "3"
 
     webserver:
-        image: puckel/docker-airflow:1.10.7
+        image: review_project
         restart: always
         depends_on:
             - postgres
@@ -25,7 +25,7 @@ services:
                 max-file: "3"
         volumes:
             - ./dags:/usr/local/airflow/dags
-            # - ./plugins:/usr/local/airflow/plugins
+            - ./plugins:/usr/local/airflow/plugins
         ports:
             - "8080:8080"
         command: webserver
@@ -34,3 +34,9 @@ services:
             interval: 30s
             timeout: 30s
             retries: 3
+
+    selenium:
+        user: root
+        image: selenium/standalone-chrome
+        ports:
+            - "4444:4444"
